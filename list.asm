@@ -47,7 +47,9 @@ NL:
              pop  hl
              inc  hl
              ld   a,(hl)
-             ld   (UNUSED1),a                ;store instruction code
+             exx
+             ld   b,a                        ;store instruction code
+             exx
              xor  a
 NEWLINE:
              jr   nz,NL
@@ -56,7 +58,9 @@ START:
              ld   a,(hl)
              cp   126                        ;check if numeric (7Eh) follows
              jr   nz,NOT126
-             ld   a,(UNUSED1)
+             exx
+             ld   a,b
+             exx
              cp   0EAh                       ;ignore numerics for REM statements
              jr   z,NOT126
              ld   bc,5
