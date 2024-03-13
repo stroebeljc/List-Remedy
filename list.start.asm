@@ -17,6 +17,14 @@ Line0Text:      DEFB $EA                        ; REM
                 DEFB _NL                        ; Newline to hide rest of line from ROM list routine
 
 
+COPYTOADDR:
+             ld   hl,NEWLIST                 ;start of package
+             ld   bc,CODEEND-NEWLIST         ;size to copy
+             ld   de,(SEED)                  ;get destination from RAND
+             ldir                            ;copy
+             ret
+
+
 NEWLIST:
              ld   d,21
              push de
@@ -80,7 +88,7 @@ MISS:
              add  hl,de                      ;address for 23,0
              push hl
              ld   (hl),80h 	                 ;print an inverse space
-PAUSE:
+PAUSE_:
              ld   hl,(LAST_K)                ;last key
              ld   de,0FD7Fh                  ;code for 'break'
              and  a
@@ -89,7 +97,7 @@ PAUSE:
              call z,ERROR1                   ;if break pressed then
              DEFB 12                         ;output error code D (note that this actually executes as INC C if no CALL)
              inc  h
-             jr   z,PAUSE                    ;halt program until key pressed
+             jr   z,PAUSE_                   ;halt program until key pressed
              pop  hl
              ld   (hl),0
 NOPAUSE:
@@ -126,13 +134,7 @@ NOSCROLL:
              pop  de
              ret
 
-
-COPYTOADDR:
-             ld   hl,NEWLIST                 ;start of package
-             ld   bc,COPYTOADDR-NEWLIST      ;size to copy
-             ld   de,(SEED)                  ;get destination from RAND
-             ldir                            ;copy
-             ret
+CODEEND
 
                 DEFB _NL                        ; Newline
 
