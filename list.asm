@@ -149,8 +149,6 @@ PAUSER:
              ld   b,0FFh
 PAUSERCALL:
              call PAUSE+3
-             ld   a,0FFh
-             ld   (FRAMES+1),a               ; sv FRAMES_hi (ROM Edition 2 bug)
              ld   hl,(LAST_K)                ;last key
              ld   de,0FD7Fh                  ;code for 'break'
              and  a
