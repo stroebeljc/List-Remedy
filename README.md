@@ -6,7 +6,7 @@ I modifed it to:
 - not be fooled by 7Eh's in REM statements
 - work in either fast or slow mode
 
-Will not work on first edition ROM because it makes ROM calls.
+Will work on first edition ROM because it adjusts ROM calls.
 
 Taken from a March 1983 article in Your Computer by Robert Pearlman.
 ![Copy of original article](https://github.com/stroebeljc/List-Remedy/blob/master/01-List%20Remedy.jpg)

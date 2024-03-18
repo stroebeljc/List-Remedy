@@ -18,6 +18,12 @@ Line0Text:      DEFB $EA                        ; REM
 
 
 COPYTOADDR:
+             ld   a,(FAST)
+             cp   $CD
+             jr   z,COPIER                   ;return if ROM edition 1 or 2
+             ld   a,$32
+             ld   (PAUSERCALL+1),a           ;adjust call to PAUSE for ROM edition 1
+COPIER:
              ld   hl,NEWLIST                 ;start of package
              ld   bc,CODEEND-NEWLIST         ;size to copy
              ld   de,(SEED)                  ;get destination from RAND
@@ -141,6 +147,7 @@ PAUSER:
              push hl
              ld   (hl),80h 	                 ;print an inverse space
              ld   b,0FFh
+PAUSERCALL:
              call PAUSE+3
              ld   a,0FFh
              ld   (FRAMES+1),a               ; sv FRAMES_hi (ROM Edition 2 bug)

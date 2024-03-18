@@ -21,6 +21,6 @@ Line30End
 Line40          DEFB $00,40                     ; Line 40
                 DEFW Line40End-Line40Text       ; Line length
 Line40Text      DEFB $F9,$D4,$C5                ; RAND USR VAL
-                DEFB _QT,_1,_6,_5,_1,_4,_QT,_PL,$D4,_R ; "16514"+USR R
+                DEFB _QT,_1,_6,_5,_1,_6,_QT,_PL,$D4,_R ; "16516"+USR R
                 DEFB _NL                        ; Newline
 Line40End 
